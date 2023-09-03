@@ -13,34 +13,50 @@ const getAllEntity = async (name) => {
 };
 
 const getAllEntityEmail = async (name, obj) => {
-  return await client
-    .db("zenstudentdashboard")
-    .collection(name)
-    .find({ email: obj })
-    .toArray();
+  try {
+    return await client
+      .db("zenstudentdashboard")
+      .collection(name)
+      .find({ email: obj })
+      .toArray();
+  } catch (error) {
+    return error;
+  }
 };
 
 const getAllEntityType = async (name, obj) => {
-  return await client
-    .db("zenstudentdashboard")
-    .collection(name)
-    .find({ type: obj })
-    .toArray();
+  try {
+    return await client
+      .db("zenstudentdashboard")
+      .collection(name)
+      .find({ type: obj })
+      .toArray();
+  } catch (error) {
+    return error;
+  }
 };
 
 const getAllEntityEmail1 = async (name, obj) => {
-  return await client
-    .db("zenstudentdashboard")
-    .collection(name)
-    .find({ email: obj.email, type: obj.type })
-    .toArray();
+  try {
+    return await client
+      .db("zenstudentdashboard")
+      .collection(name)
+      .find({ email: obj.email, type: obj.type })
+      .toArray();
+  } catch (error) {
+    return error;
+  }
 };
 
 const getOneEntity = async (name, obj) => {
-  return await client
-    .db("zenstudentdashboard")
-    .collection(name)
-    .findOne({ email: obj }, { _id: 0 });
+  try {
+    return await client
+      .db("zenstudentdashboard")
+      .collection(name)
+      .findOne({ email: obj }, { _id: 0 });
+  } catch (error) {
+    return error;
+  }
 };
 
 const createEntity = async (name, obj) => {
@@ -55,100 +71,128 @@ const createEntity = async (name, obj) => {
 };
 
 const editEntity = async (name, obj) => {
-  return await client
-    .db("zenstudentdashboard")
-    .collection(name)
-    .updateOne(
-      { email: obj.email, type: obj.type, title: obj.title },
-      {
-        $set: {
-          marks: obj.marks,
-          comments: obj.comments,
-          evaluated: obj.evaluated,
-        },
-      }
-    );
+  try {
+    return await client
+      .db("zenstudentdashboard")
+      .collection(name)
+      .updateOne(
+        { email: obj.email, type: obj.type, title: obj.title },
+        {
+          $set: {
+            marks: obj.marks,
+            comments: obj.comments,
+            evaluated: obj.evaluated,
+          },
+        }
+      );
+  } catch (error) {
+    return error;
+  }
 };
 
 const editEntityTask = async (name, obj) => {
-  return await client
-    .db("zenstudentdashboard")
-    .collection(name)
-    .updateOne(
-      { email: obj.email, day: obj.day, evaluated: false },
-      {
-        $set: {
-          marks: obj.marks,
-          comments: obj.comments,
-          evaluated: obj.evaluated,
-        },
-      }
-    );
+  try {
+    return await client
+      .db("zenstudentdashboard")
+      .collection(name)
+      .updateOne(
+        { email: obj.email, day: obj.day, evaluated: false },
+        {
+          $set: {
+            marks: obj.marks,
+            comments: obj.comments,
+            evaluated: obj.evaluated,
+          },
+        }
+      );
+  } catch (error) {
+    return error;
+  }
 };
 
 const editEntityLeave = async (name, obj) => {
-  return await client
-    .db("zenstudentdashboard")
-    .collection(name)
-    .updateOne(
-      { email: obj.email, date: obj.date, reason: obj.reason },
-      {
-        $set: {
-          approval: obj.approval,
-        },
-      }
-    );
+  try {
+    return await client
+      .db("zenstudentdashboard")
+      .collection(name)
+      .updateOne(
+        { email: obj.email, date: obj.date, reason: obj.reason },
+        {
+          $set: {
+            approval: obj.approval,
+          },
+        }
+      );
+  } catch (error) {
+    return error;
+  }
 };
 
 const editEntityQuery = async (name, obj) => {
-  return await client
-    .db("zenstudentdashboard")
-    .collection(name)
-    .updateOne(
-      { email: obj.email, quesId: obj.id },
-      {
-        $set: {
-          assignedTo: obj.assignedTo,
-        },
-      }
-    );
+  try {
+    return await client
+      .db("zenstudentdashboard")
+      .collection(name)
+      .updateOne(
+        { email: obj.email, quesId: obj.id },
+        {
+          $set: {
+            assignedTo: obj.assignedTo,
+          },
+        }
+      );
+  } catch (error) {
+    return error;
+  }
 };
 
 const editEntityReq = async (name, obj) => {
-  return await client
-    .db("zenstudentdashboard")
-    .collection(name)
-    .updateOne(
-      { reqId: obj.reqId },
-      {
-        $push: {
-          appliedBy: obj.email,
-        },
-      }
-    );
+  try {
+    return await client
+      .db("zenstudentdashboard")
+      .collection(name)
+      .updateOne(
+        { reqId: obj.reqId },
+        {
+          $push: {
+            appliedBy: obj.email,
+          },
+        }
+      );
+  } catch (error) {
+    return error;
+  }
 };
 
 const editEntityPortFolio = async (name, obj) => {
-  return await client
-    .db("zenstudentdashboard")
-    .collection(name)
-    .updateOne(
-      { email: obj.email },
-      {
-        $set: {
-          comments: obj.comments,
-          evaluated: obj.evaluated,
-          reviewedby: obj.reviewedby,
-        },
-      }
-    );
+  try {
+    return await client
+      .db("zenstudentdashboard")
+      .collection(name)
+      .updateOne(
+        { email: obj.email },
+        {
+          $set: {
+            comments: obj.comments,
+            evaluated: obj.evaluated,
+            reviewedby: obj.reviewedby,
+          },
+        }
+      );
+  } catch (error) {
+    return error;
+  }
 };
 
 const deleteEntity = async (name, obj) => {
-  return await client
-    .db("zenstudentdashboard")
-    .collection(name)
-    .deleteOne({ day: obj.day, title: obj.title });
+  try {
+    return await client
+      .db("zenstudentdashboard")
+      .collection(name)
+      .deleteOne({ day: obj.day, title: obj.title });
+  } catch (error) {
+    return error;
+  }
 };
 
 export {
