@@ -12,6 +12,7 @@ import {
   getAllEntityEmail,
   getAllEntityEmail1,
   getAllEntityType,
+  editEntityQuery,
 } from "../DB/db-utility.js";
 import { authchk } from "../Middleware/auth-chk.js";
 import upload from "../Middleware/multer.js";

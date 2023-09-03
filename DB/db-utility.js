@@ -105,10 +105,10 @@ const editEntityQuery = async (name, obj) => {
     .db("zenstudentdashboard")
     .collection(name)
     .updateOne(
-      { email: obj.email, quesId: obj.QuesId },
+      { email: obj.email, quesId: obj.id },
       {
-        $push: {
-          approval: obj.approval,
+        $set: {
+          assignedTo: obj.assignedTo,
         },
       }
     );
