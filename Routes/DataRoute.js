@@ -13,6 +13,7 @@ import {
   getAllEntityEmail1,
   getAllEntityType,
   editEntityQuery,
+  getAllEntityChat,
 } from "../DB/db-utility.js";
 import { authchk } from "../Middleware/auth-chk.js";
 import upload from "../Middleware/multer.js";
@@ -111,7 +112,7 @@ datarouter.put("/leave", authchk, async (req, res) => {
 datarouter.put("/queries", authchk, async (req, res) => {
   const dataObj = req.body;
   console.log("put", dataObj);
-  const val = await editEntityQuery("leave", dataObj);
+  const val = await editEntityQuery("queries", dataObj);
   console.log(val);
   res.send(val);
 });
@@ -180,9 +181,10 @@ datarouter.post("/webcodecapstone", authchk, async (req, res) => {
     req.headers["accesstoken"],
     process.env.JWT_SECRET,
     async (err, decoded) => {
-      console.log(decoded);
+      console.log("decoded", decoded);
       if (err) {
-        return;
+        console.log(err);
+        return err;
       } else {
         responses = await createEntity("webcastone", obj);
         console.log(responses);
@@ -375,6 +377,26 @@ datarouter.post("/deleteClass", authchk, async (req, res) => {
   } else {
     res.send({ msg: "Error During deletion" });
   }
+});
+
+datarouter.post("/chats", async (req, res) => {
+  const data = req.body;
+  console.log("data", data);
+  let responses = await createEntity("chats", data);
+  console.log(responses);
+  if (responses.acknowledged == true) {
+    res.send({ msg: "Inserted Successfully" });
+  } else {
+    res.send({ msg: "Error During Insertion" });
+  }
+});
+
+datarouter.get("/chats/:room", authchk, async (req, res) => {
+  const { room } = req.params;
+  console.log(room, room);
+  const val = await getAllEntityChat("chats", room);
+  console.log("val", val);
+  res.send(val);
 });
 
 export default datarouter;

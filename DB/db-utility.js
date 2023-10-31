@@ -48,6 +48,18 @@ const getAllEntityEmail1 = async (name, obj) => {
   }
 };
 
+const getAllEntityChat = async (name, obj) => {
+  try {
+    return await client
+      .db("zenstudentdashboard")
+      .collection(name)
+      .find({ room: obj })
+      .toArray();
+  } catch (error) {
+    return error;
+  }
+};
+
 const getOneEntity = async (name, obj) => {
   try {
     return await client
@@ -209,4 +221,5 @@ export {
   editEntityTask,
   deleteEntity,
   editEntityReq,
+  getAllEntityChat,
 };
